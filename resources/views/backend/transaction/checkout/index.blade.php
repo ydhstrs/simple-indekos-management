@@ -42,19 +42,55 @@
                 responsive: true,
                 scrollX: $(window).width() < 768, // Aktifkan scrollX hanya untuk layar kecil
                 ajax: "{{ route('dashboard.buying.data') }}",
-                columns: [
-                    {
+                columns: [{
                         data: 'id',
                         name: 'id',
                         render: function(data, type, row, meta) {
                             return meta.row + meta.settings._iDisplayStart + 1;
                         }
                     },
-                    { data: 'transaction_no', name: 'transaction_no' },
-                    { data: 'name', name: 'name' },
-                    { data: 'buying_date', name: 'buying_date', orderable: true, searchable: true  },
-                    { data: 'price', name: 'price' },
-                    { data: 'action', name: 'action', orderable: false, searchable: false }
+                    {
+                        data: 'transaction_no',
+                        name: 'transaction_no'
+                    },
+                    {
+                        data: 'name',
+                        name: 'name'
+                    },
+                    {
+                        data: 'buying_date',
+                        name: 'buying_date',
+                        orderable: true,
+                        searchable: true,
+                        render: function(data, type, row) {
+                            if (data) {
+                                const date = new Date(data);
+                                return date.toLocaleDateString('id-ID', {
+                                    day: '2-digit',
+                                    month: '2-digit',
+                                    year: 'numeric',
+
+                                });
+                            }
+                            return ''; // Fallback if data is null or empty
+                        }
+                    },
+                    {
+                        data: 'price',
+                        name: 'price',
+                        render: function(data, type, row) {
+                            return parseFloat(data).toLocaleString('id-ID', {
+                                style: 'currency',
+                                currency: 'IDR',
+                            });
+                        }
+                    },
+                    {
+                        data: 'action',
+                        name: 'action',
+                        orderable: false,
+                        searchable: false
+                    }
                 ]
             });
         });

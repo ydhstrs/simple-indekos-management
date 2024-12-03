@@ -35,33 +35,64 @@
 
 
     <script type="text/javascript">
-       $(document).ready(function() {
+        $(document).ready(function() {
             $('#billTable').DataTable({
                 processing: true,
                 serverSide: true,
                 responsive: true,
                 scrollX: $(window).width() < 768, // Aktifkan scrollX hanya untuk layar kecil
                 ajax: "{{ route('dashboard.buying.data') }}",
-                columns: [
-                    {
+                columns: [{
                         data: 'id',
                         name: 'id',
                         render: function(data, type, row, meta) {
                             return meta.row + meta.settings._iDisplayStart + 1;
                         }
                     },
-                    { data: 'transaction_no', name: 'transaction_no' },
-                    { data: 'name', name: 'name' },
-                    { data: 'price', name: 'price',
-                          render: function(data, type, row) {
+                    {
+                        data: 'transaction_no',
+                        name: 'transaction_no'
+                    },
+                    {
+                        data: 'name',
+                        name: 'name'
+                    },
+                    {
+                        data: 'price',
+                        name: 'price',
+                        render: function(data, type, row) {
                             return parseFloat(data).toLocaleString('id-ID', {
                                 style: 'currency',
                                 currency: 'IDR',
                             });
 
-                        } },
-                    { data: 'buying_date', name: 'buying_date       ', orderable: true, searchable: true  },
-                    { data: 'action', name: 'action', orderable: false, searchable: false }
+                        }
+                    },
+                    {
+                        data: 'buying_date',
+                        name: 'buying_date',
+                        orderable: true,
+                        searchable: false,
+                        render: function(data, type, row) {
+                            if (data) {
+                                const date = new Date(data);
+                                return date.toLocaleDateString('id-ID', {
+                                    day: '2-digit',
+                                    month: '2-digit',
+                                    year: 'numeric',
+
+                                });
+                            }
+                            return ''; // Fallback if data is null or empty
+                        }
+
+                    },
+                    {
+                        data: 'action',
+                        name: 'action',
+                        orderable: false,
+                        searchable: false
+                    }
                 ]
             });
         });
