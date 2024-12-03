@@ -41,7 +41,7 @@
                 </div>
 
             </form>
-
+{{-- 
             <div class="mb-3">
                 <div class="row">
                     <div class="col-md">
@@ -51,7 +51,7 @@
                         </a>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
         </div>
 
