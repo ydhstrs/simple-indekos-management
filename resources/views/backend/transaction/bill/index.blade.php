@@ -42,7 +42,8 @@
                 serverSide: true,
                 responsive: true,
                 scrollX: $(window).width() < 768, // Aktifkan scrollX hanya untuk layar kecil
-                ajax: "{{ route('dashboard.bill.data') }}",
+                ajax: "{{ route('dashboard.bill.data') }}, ",
+                
                 columns: [{
                         data: 'id',
                         name: 'id',
