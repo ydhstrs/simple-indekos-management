@@ -20,6 +20,7 @@
                     <thead>
                         <tr class="text-center">
                             <th>No</th>
+                            <th>Nomor Transaksi</th>
                             <th>Nama</th>
                             <th>Tanggal Bill</th>
                             <th>Tanggal Pembayaran</th>
@@ -42,7 +43,7 @@
                 serverSide: true,
                 responsive: true,
                 scrollX: $(window).width() < 768, // Aktifkan scrollX hanya untuk layar kecil
-                ajax: "{{ route('dashboard.bill.data') }}, ",
+                ajax: "{{ route('dashboard.bill.data') }}",
                 
                 columns: [{
                         data: 'id',
@@ -50,6 +51,10 @@
                         render: function(data, type, row, meta) {
                             return meta.row + meta.settings._iDisplayStart + 1;
                         }
+                    },
+                    {
+                        data: 'transaction_no',
+                        name: 'transaction_no'
                     },
                     {
                         data: 'guest_name',
