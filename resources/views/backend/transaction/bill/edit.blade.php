@@ -37,10 +37,16 @@
                         placeholder="" value="{{ $item->bill_date }}" readonly>
                 </div>
                 <div class="mb-6">
+                    <label for="payment_date" class="block mb-2 text-sm font-medium text-gray-900 ">Durasi (Bulan)</label>
+                    <input type="text" id="duration" name="duration"
+                        class="form-control bg-gray-50 border border-gray-300 text-black text-sm rounded-lg block w-full p-2.5"
+                        placeholder="" required onchange="updateAmount()">
+                </div>
+                <div class="mb-6">
                     <label for="amount" class="block mb-2 text-sm font-medium text-gray-900 ">Jumlah</label>
                     <input type="text" id="amount" name="amount"
                         class="rupiah-input form-control bg-gray-50 border border-gray-300 text-black text-sm rounded-lg block w-full p-2.5"
-                        placeholder="" value="{{ 'Rp ' . number_format($item->amount, 0, ',', '.') }}" readonly>
+                        placeholder="" value="{{ number_format($item->amount, 0, ',', '.') }}">
                 </div>
                 <div class="mb-6">
                     <label for="floor" class="block mb-2 text-sm font-medium text-gray-900 ">Nama/Nomor Kamar</label>
@@ -55,12 +61,7 @@
                         class="form-control bg-gray-50 border border-gray-300 text-black text-sm rounded-lg block w-full p-2.5"
                         placeholder="" value="{{ $item->payment_date }}" required>
                 </div>
-                <div class="mb-6">
-                    <label for="payment_date" class="block mb-2 text-sm font-medium text-gray-900 ">Durasi (Bulan)</label>
-                    <input type="text" id="duration" name="duration"
-                        class="form-control bg-gray-50 border border-gray-300 text-black text-sm rounded-lg block w-full p-2.5"
-                        placeholder="" required>
-                </div>
+
                 <div class="mb-6">
                     <label class="block mb-2 text-sm font-medium text-gray-900" for="file_input">Bukti Pembayaran</label>
                     <img src="data:image/png;base64,{{ $item->image }}" alt="Bukti Pembayaran" id="imgPreview"
@@ -129,5 +130,25 @@
             }
         }
     </script>
+
+    <script>
+    // Function to update the amount based on duration
+    function updateAmount() {
+        // Get the duration value
+        const duration = parseFloat(document.getElementById('duration').value);
+
+        // Get the original amount value (remove formatting for calculation)
+        const originalAmount = parseFloat("{{ $item->amount }}");
+
+        // Calculate the new amount
+        const newAmount = duration * originalAmount;
+
+        // Format the new amount (e.g., 350000 -> 350.000)
+        const formattedAmount = new Intl.NumberFormat('id-ID').format(newAmount);
+
+        // Update the amount input field
+        document.getElementById('amount').value = formattedAmount;
+    }
+</script>
 
 @endsection

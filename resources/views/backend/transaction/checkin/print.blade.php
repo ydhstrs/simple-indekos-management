@@ -78,7 +78,8 @@
                 <li>Pihak Kedua telah membayar biaya sewa sebesar
                     {{ 'Rp ' . number_format($checkin->amount, 0, ',', '.') }} sehingga Pihak Kedua berhak atas sewa
                     sejak tanggal {{ \Carbon\Carbon::parse($checkin->checkin_date)->translatedFormat('d F Y') }}
-                    hingga tanggal {{ \Carbon\Carbon::parse($checkin->bill->bill_date)->translatedFormat('d F Y') }}
+                    hingga tanggal {{ \Carbon\Carbon::parse($checkin->bill?->bill_date)->translatedFormat('d F Y') ?? '-' }}
+
                 </li>
             </ul>
         </div>

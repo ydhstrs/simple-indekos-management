@@ -80,9 +80,9 @@ class BillController extends Controller
             'image' => '',
             'amount' => '',
         ]);
-        $validatedData['amount'] = (int) str_replace('.', '', $request->amount);
-        $validatedData['amount'] = (int) str_replace('Rp', '', $validatedData['amount']);
-        $validatedData['amount'] = $validatedData['amount'] * $validatedData['duration'] ;
+        // $validatedData['amount'] = (int) str_replace('.', '', $request->amount);
+        // $validatedData['amount'] = (int) str_replace('Rp', '', $validatedData['amount']);
+        // $validatedData['amount'] = $validatedData['amount'] * $validatedData['duration'] ;
 
         Bill::where('id', $bill->id)->update($validatedData);
         $room = Room::find($bill->room_id);
@@ -141,6 +141,7 @@ class BillController extends Controller
 
     public function edit(Bill $bill)
     {
+        
         return view('backend.transaction.bill.edit', [
             'item' => $bill,
             'title' => 'Bayar Bill',
