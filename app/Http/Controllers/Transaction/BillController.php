@@ -74,14 +74,15 @@ class BillController extends Controller
         // @ddd($request);
         $idUser = Auth::id();
         $nameUser = Auth::user()->name;
+        $amount = str_replace('.', '', $request->amount);
         $validatedData = $request->validate([
             'payment_date' => 'required|date',
             'duration' => 'required|max:11',
             'image' => '',
             'amount' => '',
         ]);
-        // $validatedData['amount'] = (int) str_replace('.', '', $request->amount);
-        // $validatedData['amount'] = (int) str_replace('Rp', '', $validatedData['amount']);
+        $validatedData['amount'] = $amount ;
+        // $validatedData['amount'] = (int) str_replace('Rp', '', $validatedData['a\mount']);
         // $validatedData['amount'] = $validatedData['amount'] * $validatedData['duration'] ;
 
         Bill::where('id', $bill->id)->update($validatedData);
@@ -102,7 +103,7 @@ class BillController extends Controller
             'date' => $request->payment_date,
             'guest_name' => $bill->guest_name,
             'room_id' => $bill->room_id,
-            'amount' => $validatedData['amount']  * $validatedData['amount'] ,
+            'amount' => $validatedData['amount'],
             'created_by' => $idUser,
         ]);
 
