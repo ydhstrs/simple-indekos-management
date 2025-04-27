@@ -57,7 +57,7 @@
         </tr>
         <tr>
             <th>Jumlah</th>
-            <td>{{ $bill->amount }}</td>
+            <td>Rp {{ number_format($bill->amount, 0, ',', '.') }}</td>
         </tr>
     </table>
 </div>
