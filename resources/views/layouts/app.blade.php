@@ -113,7 +113,28 @@
                 this.value = new Intl.NumberFormat('id-ID').format(value); // Format ulang dengan titik
             });
         });
+
+        function onlyAllowNumbers(event) {
+            const allowedKeys = [
+                'Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab'
+            ];
+            
+            // Allow navigation and control keys
+            if (allowedKeys.includes(event.key)) {
+                return true;
+            }
+
+            // Block if not a digit
+            if (!/^[0-9]$/.test(event.key)) {
+                event.preventDefault();
+                return false;
+            }
+
+            return true;
+        }
     </script>
 </body>
+
+
 
 </html>

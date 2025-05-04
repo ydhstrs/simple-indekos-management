@@ -88,7 +88,7 @@
                     </div>
                     <div class="w-full md:w-1/2">
                         <label for="charge" class="block mb-2 text-sm font-medium text-gray-900 ">Durasi (Bulan)</label>
-                        <input type="text" id="duration" name="duration" onchange="updateRoomPrice()"
+                        <input type="text" id="duration" name="duration" onkeydown="return onlyAllowNumbers(event);"  onchange="updateRoomPrice()"
                             class="form-control bg-gray-50 border border-gray-300 text-black text-sm rounded-lg block w-full p-2.5"
                             placeholder="" required>
                     </div>
@@ -280,5 +280,7 @@ oFReader.onload = function (oFREvent){
             document.getElementById("amount").value = amount;
             document.getElementById("room_price").value = price;
         }
+
+    
     </script>
 @endsection

@@ -38,7 +38,7 @@
                 </div>
                 <div class="mb-6">
                     <label for="payment_date" class="block mb-2 text-sm font-medium text-gray-900 ">Durasi (Bulan)</label>
-                    <input type="text" id="duration" name="duration"
+                    <input type="text" id="duration" onkeydown="return onlyAllowNumbers(event);" name="duration"
                         class="form-control bg-gray-50 border border-gray-300 text-black text-sm rounded-lg block w-full p-2.5"
                         placeholder="" required onchange="updateAmount()">
                 </div>
